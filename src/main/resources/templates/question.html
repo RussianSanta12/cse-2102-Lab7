@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Question</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Quiz Question</h1>
+
+    <p th:text="'Question ' + (${currentIndex} + 1) + ' of ' + ${total}"></p>
+
+    <p th:text="${questionText}"></p>
+
+    <form th:action="@{/answer}" th:method="post">
+        <!-- include CSRF token if Spring Security is enabled -->
+        <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <label>
+            <input type="radio" name="answer" value="true" checked /> True
+        </label>
+        <label>
+            <input type="radio" name="answer" value="false" /> False
+        </label>
+        <button type="submit">Submit</button>
+    </form>
+
+    <p th:text="'Current score: ' + ${score}"></p>
+
+</body>
+</html>
